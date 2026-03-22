@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serge Senghor — Portfolio Graphiste</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --teranga: #c8873a;
+    --teranga-dark: #9e5f1c;
+    --teal: #2a7a7a;
+    --accent: #e8d5b0;
+    --white: #fefcf8;
+    --gray: #6b6355;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--teranga); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    pointer-events: none;
+  }
+
+  .hero-shape {
+    border-radius: 50%;
+    opacity: 0.08;
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero-shape:nth-child(1) { grid-column: 6/8; grid-row: 1/4; background: var(--teranga); animation-delay: 0s; }
+  .hero-shape:nth-child(2) { grid-column: 1/3; grid-row: 5/8; background: var(--teal); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation-delay: 2s; }
+  .hero-shape:nth-child(3) { grid-column: 7/9; grid-row: 6/9; background: var(--teranga-dark); animation-delay: 4s; }
+
+  .hero-label {
+    position: absolute; top: 8rem; right: 4rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-label::after {
+    content: '';
+    display: block;
+    width: 1px; height: 4rem;
+    background: var(--teranga);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--teranga);
+    color: var(--white);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--teranga);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--gray);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .hero-cta:hover { background: var(--teranga); gap: 1.5rem; }
+  .hero-cta-arrow { font-size: 1.2rem; }
+
+  /* MARQUEE */
+  .marquee-section {
+    background: var(--ink);
+    overflow: hidden;
+    padding: 1.2rem 0;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .marquee-dot {
+    width: 4px; height: 4px;
+    background: var(--teranga);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .about-left { padding-right: 6rem; border-right: 1px solid var(--accent); }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teranga);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--teranga);
+  }
+
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .about-text {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-right { padding-left: 6rem; display: flex; flex-direction: column; justify-content: center; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--accent);
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .skill-card:hover {
+    border-color: var(--teranga);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(200, 135, 58, 0.1);
+  }
+
+  .skill-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .skill-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+  .skill-tools { font-size: 0.75rem; color: var(--gray); line-height: 1.6; }
+
+  /* PORTFOLIO */
+  .portfolio {
+    padding: 8rem 4rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .portfolio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .portfolio-title em { font-style: italic; color: var(--teranga); }
+
+  .portfolio-subtitle { font-size: 0.9rem; color: rgba(245, 240, 232, 0.5); max-width: 280px; line-height: 1.7; text-align: right; }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #2a2520;
+    group: true;
+  }
+
+  .portfolio-item:nth-child(1) { grid-column: 1 / 3; }
+  .portfolio-item:nth-child(4) { grid-column: 2 / 4; }
+
+  .portfolio-canvas {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .portfolio-item:hover .portfolio-canvas { transform: scale(1.03); }
+
+  .portfolio-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,20,16,0.95) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+  .portfolio-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teranga);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .portfolio-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--paper);
+  }
+
+  /* EXPERIENCE */
+  .experience {
+    padding: 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    margin-top: 4rem;
+  }
+
+  .exp-timeline { position: relative; }
+  .exp-item {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .exp-item:hover { padding-left: 1rem; border-bottom-color: var(--teranga); }
+  .exp-item:first-child { border-top: 1px solid var(--accent); }
+
+  .exp-date { font-size: 0.7rem; color: var(--teranga); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 0.5rem; text-transform: uppercase; }
+  .exp-company { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .exp-role { font-size: 0.85rem; color: var(--gray); }
+
+  .exp-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .exp-big-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .exp-desc { color: var(--gray); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-tag {
+    background: var(--accent);
+    color: var(--ink);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--teranga);
+    padding: 8rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: 'CONTACT';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 20rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.06);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .contact-sub { font-size: 1rem; color: rgba(254,252,248,0.7); margin-bottom: 3rem; position: relative; }
+
+  .contact-link {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1.2rem 3rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .contact-link:hover { background: var(--paper); color: var(--ink); }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .contact-info-item { text-align: center; }
+  .contact-info-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(254,252,248,0.5); margin-bottom: 0.4rem; font-weight: 600; }
+  .contact-info-value { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--paper); font-weight: 700; }
+  .footer-copy { font-size: 0.75rem; color: var(--gray); }
+
+  /* ANIMATIONS */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 2rem 4rem; }
+    .about { grid-template-columns: 1fr; padding: 5rem 2rem; }
+    .about-left { border-right: none; padding-right: 0; padding-bottom: 3rem; border-bottom: 1px solid var(--accent); }
+    .about-right { padding-left: 0; padding-top: 3rem; }
+    .portfolio { padding: 5rem 2rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-item:nth-child(1), .portfolio-item:nth-child(4) { grid-column: 1; }
+    .experience { padding: 5rem 2rem; }
+    .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact { padding: 5rem 2rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">S. Senghor</a>
+  <ul class="nav-links">
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#work">Travaux</a></li>
+    <li><a href="#experience">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+  </div>
+  <div class="hero-label">Graphiste & Créateur visuel</div>
+  <div class="hero-content">
+    <div class="hero-tag">Portfolio 2026</div>
+    <h1 class="hero-title">Design<br><em>Africain</em><br>Moderne</h1>
+    <p class="hero-sub">Stagiaire graphiste passionné par la culture africaine, la typographie et la communication visuelle. Basé à Dakar.</p>
+    <a href="#work" class="hero-cta">
+      Voir mes travaux
+      <span class="hero-cta-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Identité Visuelle <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Réseaux Sociaux <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Couvertures de Livres <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Affiches & Flyers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Typographie <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Édition & Print <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Identité Visuelle <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Réseaux Sociaux <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Couvertures de Livres <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Affiches & Flyers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Typographie <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Édition & Print <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-left reveal">
+    <div class="section-eyebrow">À propos</div>
+    <h2 class="about-title">Créativité & Culture Africaine</h2>
+    <p class="about-text">Je suis Serge Senghor, étudiant en Génie Logiciel à l'ESP de Dakar, avec une forte passion pour le design graphique et la communication visuelle. Ma sensibilité culturelle africaine — nourrie par mes centres d'intérêt pour le manga, l'animé et les arts — inspire profondément mon travail créatif.</p>
+    <p class="about-text">Je maîtrise les outils Figma, Canva et Photoshop, et j'ai eu l'occasion de concevoir des interfaces, des supports de communication et des visuels dans le cadre de mes stages et formations. Je suis convaincu que le design peut être un vecteur puissant de promotion de la littérature et de la culture africaine.</p>
+  </div>
+  <div class="about-right reveal">
+    <div class="section-eyebrow">Compétences</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-name">Design Graphique</div>
+        <div class="skill-tools">Figma · Canva · Photoshop · Composition visuelle</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📖</div>
+        <div class="skill-name">Édition & Print</div>
+        <div class="skill-tools">Couvertures · Affiches · Flyers · Maquettes</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <div class="skill-name">Réseaux Sociaux</div>
+        <div class="skill-tools">Visuels Instagram · Bannières · Stories</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💻</div>
+        <div class="skill-name">Web & UI/UX</div>
+        <div class="skill-tools">React · HTML/CSS · Prototypage Figma</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="work">
+  <div class="portfolio-header reveal">
+    <h2 class="portfolio-title">Mes<br><em>Travaux</em></h2>
+    <p class="portfolio-subtitle">Une sélection de créations graphiques illustrant mon approche visuelle et ma sensibilité culturelle.</p>
+  </div>
+
+  <div class="portfolio-grid">
+    <!-- Item 1: Couverture de livre -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c1" width="800" height="420"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Édition · Couverture</div>
+        <div class="portfolio-name">Collection Téranga — Couverture Roman</div>
+      </div>
+    </div>
+
+    <!-- Item 2: Visuel réseaux sociaux -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c2" width="400" height="420"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Social Media · Visuel</div>
+        <div class="portfolio-name">Post Instagram Lancement</div>
+      </div>
+    </div>
+
+    <!-- Item 3: Affiche événement -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c3" width="400" height="500"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Print · Affiche</div>
+        <div class="portfolio-name">Soirée Littéraire Dakar</div>
+      </div>
+    </div>
+
+    <!-- Item 4: Identité visuelle -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c4" width="800" height="500"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Identité · Branding</div>
+        <div class="portfolio-name">Identité Visuelle Maison d'Édition</div>
+      </div>
+    </div>
+
+    <!-- Item 5: Bannière -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c5" width="400" height="500"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Web · Bannière</div>
+        <div class="portfolio-name">Bannière Campagne Lecture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="section-eyebrow reveal">Parcours</div>
+  <div class="exp-grid">
+    <div class="exp-timeline reveal">
+      <div class="exp-item" onclick="showExp(0)">
+        <div class="exp-date">Août – Sept. 2024</div>
+        <div class="exp-company">Banque de l'Habitat du Sénégal</div>
+        <div class="exp-role">Stagiaire Développeur & UI Designer</div>
+      </div>
+      <div class="exp-item" onclick="showExp(1)">
+        <div class="exp-date">Mai – Juil. 2024</div>
+        <div class="exp-company">ESP-DGI Centre de Ressources</div>
+        <div class="exp-role">Stagiaire Data Engineering</div>
+      </div>
+      <div class="exp-item" onclick="showExp(2)">
+        <div class="exp-date">Mai – Sept. 2023</div>
+        <div class="exp-company">Laboratoire LITA</div>
+        <div class="exp-role">Stagiaire Développeur</div>
+      </div>
+    </div>
+
+    <div class="exp-detail reveal" id="expDetail">
+      <h3 class="exp-big-title">Banque de l'Habitat du Sénégal</h3>
+      <p class="exp-desc">Conception d'interfaces utilisateurs fonctionnelles et esthétiques pour une application interne C# (.NET). Travail sur l'expérience visuelle et la cohérence graphique des écrans, incluant maquettes UI/UX et documentation technique illustrée.</p>
+      <div class="exp-tags">
+        <span class="exp-tag">Figma</span>
+        <span class="exp-tag">UI Design</span>
+        <span class="exp-tag">C# .NET</span>
+        <span class="exp-tag">Documentation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="contact-title">Travaillons<br>Ensemble</h2>
+  <p class="contact-sub">Disponible pour un stage dès maintenant. Basé à Dakar.</p>
+  <a href="mailto:sergesenghor@esp.sn" class="contact-link">Me contacter</a>
+  <div class="contact-info">
+    <div class="contact-info-item">
+      <div class="contact-info-label">Email</div>
+      <div class="contact-info-value">sergesenghor@esp.sn</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Téléphone</div>
+      <div class="contact-info-value">+221 777 897 742</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Localisation</div>
+      <div class="contact-info-value">Dakar, Sénégal</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Serge Senghor</div>
+  <div class="footer-copy">© 2026 — Portfolio Graphiste</div>
+</footer>
+
+<script>
+// ======= CANVAS DRAWINGS =======
+function drawCanvas1() {
+  const c = document.getElementById('c1');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  // Book cover mock - warm editorial
+  const bg = ctx.createLinearGradient(0,0,w,h);
+  bg.addColorStop(0, '#2a1a0a');
+  bg.addColorStop(1, '#1a3030');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+
+  // Geometric pattern - African inspired
+  ctx.strokeStyle = 'rgba(200, 135, 58, 0.3)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 12; i++) {
+    const x = (w / 11) * i;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, (h/11)*i); ctx.lineTo(w, (h/11)*i); ctx.stroke();
+  }
+
+  // Big circle
+  ctx.beginPath();
+  ctx.arc(w * 0.3, h * 0.5, h * 0.38, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(200, 135, 58, 0.6)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Inner circle
+  ctx.beginPath();
+  ctx.arc(w * 0.3, h * 0.5, h * 0.22, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(200, 135, 58, 0.15)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(200, 135, 58, 0.8)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Triangle shapes
+  ctx.strokeStyle = 'rgba(42, 122, 122, 0.5)';
+  ctx.lineWidth = 1.5;
+  [[w*0.55, h*0.1], [w*0.8, h*0.7], [w*0.6, h*0.85]].forEach(([tx, ty], i) => {
+    const size = [60, 90, 45][i];
+    ctx.beginPath();
+    ctx.moveTo(tx, ty - size); ctx.lineTo(tx + size*0.87, ty + size*0.5);
+    ctx.lineTo(tx - size*0.87, ty + size*0.5); ctx.closePath(); ctx.stroke();
+  });
+
+  // Title text
+  ctx.fillStyle = '#f5f0e8';
+  ctx.font = 'bold 36px Georgia, serif';
+  ctx.fillText('Les Voix du', w * 0.45, h * 0.38);
+  ctx.font = 'italic bold 52px Georgia, serif';
+  ctx.fillStyle = '#c8873a';
+  ctx.fillText('Fleuve', w * 0.45, h * 0.55);
+  ctx.font = '14px sans-serif';
+  ctx.fillStyle = 'rgba(245,240,232,0.6)';
+  ctx.fillText('— Roman —', w * 0.45, h * 0.67);
+  ctx.font = 'bold 13px sans-serif';
+  ctx.fillStyle = 'rgba(245,240,232,0.4)';
+  ctx.fillText('ÉDITIONS TÉRANGA SÉNÉGAL', w * 0.45, h * 0.88);
+}
+
+function drawCanvas2() {
+  const c = document.getElementById('c2');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  // Instagram post style
+  const bg = ctx.createLinearGradient(0,0,w,h);
+  bg.addColorStop(0, '#c8873a');
+  bg.addColorStop(0.5, '#9e5f1c');
+  bg.addColorStop(1, '#2a1a0a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,w,h);
+
+  // Dot grid
+  ctx.fillStyle = 'rgba(255,255,255,0.08)';
+  for (let x = 20; x < w; x += 28) {
+    for (let y = 20; y < h; y += 28) {
+      ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  // Big quote mark
+  ctx.font = 'bold 180px Georgia, serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.08)';
+  ctx.fillText('"', 20, 220);
+
+  // Diagonal line
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 6]);
+  ctx.beginPath(); ctx.moveTo(0, h*0.6); ctx.lineTo(w, h*0.4); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Text
+  ctx.fillStyle = '#fefcf8';
+  ctx.font = 'bold 16px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('📚 NOUVEAU TITRE', w/2, h*0.42);
+
+  ctx.font = 'italic bold 30px Georgia, serif';
+  ctx.fillText('Disponible', w/2, h*0.54);
+  ctx.fillText('Maintenant', w/2, h*0.62);
+
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = 'rgba(254,252,248,0.6)';
+  ctx.fillText('@editionsterangasn', w/2, h*0.76);
+
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillStyle = 'rgba(254,252,248,0.9)';
+  ctx.fillText('#LittératureAfricaine  #Dakar', w/2, h*0.86);
+}
+
+function drawCanvas3() {
+  const c = document.getElementById('c3');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  // Event poster
+  ctx.fillStyle = '#0d1f1f';
+  ctx.fillRect(0,0,w,h);
+
+  // Concentric arcs
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath();
+    ctx.arc(w/2, h*0.38, 30 + i*30, Math.PI, 0);
+    ctx.strokeStyle = `rgba(200,135,58,${0.1 + i*0.05})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Vertical lines
+  ctx.strokeStyle = 'rgba(42,122,122,0.2)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < w; x += 20) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+
+  // Filled circle
+  ctx.beginPath();
+  ctx.arc(w/2, h*0.38, 75, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(200,135,58,0.15)';
+  ctx.fill();
+  ctx.strokeStyle = '#c8873a';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Text in circle
+  ctx.fillStyle = '#c8873a';
+  ctx.font = 'bold 11px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('SOIRÉE', w/2, h*0.34);
+  ctx.font = 'bold 24px Georgia, serif';
+  ctx.fillStyle = '#fefcf8';
+  ctx.fillText('Littéraire', w/2, h*0.41);
+
+  // Bottom text
+  ctx.font = 'bold 28px Georgia, serif';
+  ctx.fillStyle = '#fefcf8';
+  ctx.fillText('Dakar Lit', w/2, h*0.62);
+
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = 'rgba(254,252,248,0.5)';
+  ctx.fillText('Centre Culturel Léopold Sédar Senghor', w/2, h*0.71);
+  ctx.fillText('Samedi 15 Avril 2026 · 18h00', w/2, h*0.78);
+
+  ctx.font = 'bold 11px sans-serif';
+  ctx.fillStyle = '#c8873a';
+  ctx.fillText('ÉDITIONS TÉRANGA SÉNÉGAL', w/2, h*0.88);
+}
+
+function drawCanvas4() {
+  const c = document.getElementById('c4');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  // Brand identity showcase
+  ctx.fillStyle = '#f5f0e8';
+  ctx.fillRect(0,0,w,h);
+
+  // Left panel
+  ctx.fillStyle = '#1a1410';
+  ctx.fillRect(0, 0, w*0.4, h);
+
+  // Logomark
+  const cx = w*0.2, cy = h*0.5;
+  ctx.strokeStyle = '#c8873a';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(cx, cy, 55, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, 35, 0, Math.PI*2); ctx.stroke();
+  ctx.strokeStyle = 'rgba(200,135,58,0.4)';
+  ctx.lineWidth = 1;
+  for (let a = 0; a < Math.PI*2; a += Math.PI/4) {
+    ctx.beginPath();
+    ctx.moveTo(cx + 35*Math.cos(a), cy + 35*Math.sin(a));
+    ctx.lineTo(cx + 55*Math.cos(a), cy + 55*Math.sin(a));
+    ctx.stroke();
+  }
+  ctx.fillStyle = '#fefcf8';
+  ctx.font = 'bold 13px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('ÉTS', cx, cy+5);
+
+  // Typography right side
+  ctx.fillStyle = '#1a1410';
+  ctx.font = 'bold 42px Georgia, serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('Éditions', w*0.45, h*0.42);
+  ctx.fillStyle = '#c8873a';
+  ctx.fillText('Téranga', w*0.45, h*0.60);
+  ctx.fillStyle = '#6b6355';
+  ctx.font = '11px sans-serif';
+  ctx.fillText('SÉNÉGAL  ·  LITTÉRATURE  ·  CULTURE', w*0.45, h*0.72);
+
+  // Color swatches
+  const colors = ['#1a1410','#c8873a','#2a7a7a','#f5f0e8'];
+  colors.forEach((col, i) => {
+    ctx.fillStyle = col;
+    ctx.fillRect(w*0.45 + i*45, h*0.82, 35, 35);
+  });
+}
+
+function drawCanvas5() {
+  const c = document.getElementById('c5');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  // Reading campaign banner
+  const bg = ctx.createLinearGradient(0,0,0,h);
+  bg.addColorStop(0, '#2a7a7a');
+  bg.addColorStop(1, '#1a3030');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,w,h);
+
+  // Decorative pattern
+  ctx.strokeStyle = 'rgba(245,240,232,0.08)';
+  ctx.lineWidth = 1;
+  for (let i = -h; i < w+h; i += 30) {
+    ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i+h, h); ctx.stroke();
+  }
+
+  // Open book silhouette (simple)
+  ctx.fillStyle = 'rgba(245,240,232,0.06)';
+  ctx.beginPath();
+  ctx.moveTo(w*0.1, h*0.6);
+  ctx.bezierCurveTo(w*0.1, h*0.3, w*0.5, h*0.25, w*0.5, h*0.35);
+  ctx.bezierCurveTo(w*0.5, h*0.25, w*0.9, h*0.3, w*0.9, h*0.6);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#fefcf8';
+  ctx.font = 'bold 13px sans-serif';
+  ctx.fillText('CAMPAGNE NATIONALE', w/2, h*0.22);
+
+  ctx.font = 'italic bold 38px Georgia, serif';
+  ctx.fillText('Lisons', w/2, h*0.42);
+  ctx.font = 'bold 38px Georgia, serif';
+  ctx.fillStyle = '#c8873a';
+  ctx.fillText('Sénégal', w/2, h*0.54);
+
+  ctx.font = '12px sans-serif';
+  ctx.fillStyle = 'rgba(254,252,248,0.6)';
+  ctx.fillText('Un livre pour chaque enfant', w/2, h*0.66);
+
+  ctx.fillStyle = '#c8873a';
+  ctx.font = 'bold 11px sans-serif';
+  ctx.fillText('ÉDITIONS TÉRANGA SÉNÉGAL', w/2, h*0.86);
+}
+
+// Experience switcher
+const expData = [
+  {
+    title: 'Banque de l\'Habitat du Sénégal',
+    desc: 'Conception d\'interfaces utilisateurs fonctionnelles et esthétiques pour une application interne. Réalisation de maquettes UI/UX, cohérence graphique des écrans et documentation technique illustrée.',
+    tags: ['Figma', 'UI Design', 'C# .NET', 'Documentation']
+  },
+  {
+    title: 'ESP-DGI Centre de Ressources',
+    desc: 'Production de rapports d\'évaluation technique avec mise en page soignée. Création de supports de présentation clairs et visuellement attractifs pour une communication efficace des résultats.',
+    tags: ['Data Viz', 'Python', 'Présentation', 'Rapport Technique']
+  },
+  {
+    title: 'Laboratoire LITA',
+    desc: 'Participation à la conception technique et visuelle d\'applications internes. Réalisation de supports de documentation graphique et contribution à l\'ergonomie des interfaces développées.',
+    tags: ['UI', 'Documentation', 'Conception', 'Tests']
+  }
+];
+
+function showExp(i) {
+  const d = expData[i];
+  const el = document.getElementById('expDetail');
+  el.innerHTML = `
+    <h3 class="exp-big-title">${d.title}</h3>
+    <p class="exp-desc">${d.desc}</p>
+    <div class="exp-tags">${d.tags.map(t => `<span class="exp-tag">${t}</span>`).join('')}</div>
+  `;
+}
+
+// Intersection Observer for reveals
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 100);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => obs.observe(el));
+
+// Draw canvases on load
+window.addEventListener('load', () => {
+  drawCanvas1(); drawCanvas2(); drawCanvas3(); drawCanvas4(); drawCanvas5();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serge Senghor — Portfolio Graphiste</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  .material-icons { vertical-align: middle; }
+</style>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --teranga: #c8873a;
+    --teranga-dark: #9e5f1c;
+    --teal: #2a7a7a;
+    --accent: #e8d5b0;
+    --white: #fefcf8;
+    --gray: #6b6355;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--teranga); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    pointer-events: none;
+  }
+
+  .hero-shape {
+    border-radius: 50%;
+    opacity: 0.08;
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero-shape:nth-child(1) { grid-column: 6/8; grid-row: 1/4; background: var(--teranga); animation-delay: 0s; }
+  .hero-shape:nth-child(2) { grid-column: 1/3; grid-row: 5/8; background: var(--teal); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation-delay: 2s; }
+  .hero-shape:nth-child(3) { grid-column: 7/9; grid-row: 6/9; background: var(--teranga-dark); animation-delay: 4s; }
+
+  .hero-label {
+    position: absolute; top: 8rem; right: 4rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-label::after {
+    content: '';
+    display: block;
+    width: 1px; height: 4rem;
+    background: var(--teranga);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--teranga);
+    color: var(--white);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--teranga);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--gray);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .hero-cta:hover { background: var(--teranga); gap: 1.5rem; }
+  .hero-cta-arrow { font-size: 1.2rem; }
+
+  /* MARQUEE */
+  .marquee-section {
+    background: var(--ink);
+    overflow: hidden;
+    padding: 1.2rem 0;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .marquee-dot {
+    width: 4px; height: 4px;
+    background: var(--teranga);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .about-left { padding-right: 6rem; border-right: 1px solid var(--accent); }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teranga);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--teranga);
+  }
+
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .about-text {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-right { padding-left: 6rem; display: flex; flex-direction: column; justify-content: center; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--accent);
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .skill-card:hover {
+    border-color: var(--teranga);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(200, 135, 58, 0.1);
+  }
+
+  .skill-icon { font-size: 2rem; margin-bottom: 0.8rem; color: var(--teranga); }
+  .skill-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+  .skill-tools { font-size: 0.75rem; color: var(--gray); line-height: 1.6; }
+
+  /* PORTFOLIO */
+  .portfolio {
+    padding: 8rem 4rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .portfolio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .portfolio-title em { font-style: italic; color: var(--teranga); }
+
+  .portfolio-subtitle { font-size: 0.9rem; color: rgba(245, 240, 232, 0.5); max-width: 280px; line-height: 1.7; text-align: right; }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #2a2520;
+    group: true;
+  }
+
+  .portfolio-item:nth-child(1) { grid-column: 1 / 3; }
+  .portfolio-item:nth-child(4) { grid-column: 2 / 4; }
+
+  .portfolio-canvas {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .portfolio-item:hover .portfolio-canvas { transform: scale(1.03); }
+
+  .portfolio-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,20,16,0.95) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+  .portfolio-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teranga);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .portfolio-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--paper);
+  }
+
+  /* EXPERIENCE */
+  .experience {
+    padding: 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    margin-top: 4rem;
+  }
+
+  .exp-timeline { position: relative; }
+  .exp-item {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .exp-item:hover { padding-left: 1rem; border-bottom-color: var(--teranga); }
+  .exp-item:first-child { border-top: 1px solid var(--accent); }
+
+  .exp-date { font-size: 0.7rem; color: var(--teranga); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 0.5rem; text-transform: uppercase; }
+  .exp-company { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .exp-role { font-size: 0.85rem; color: var(--gray); }
+
+  .exp-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .exp-big-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .exp-desc { color: var(--gray); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-tag {
+    background: var(--accent);
+    color: var(--ink);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--teranga);
+    padding: 8rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: 'CONTACT';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 20rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.06);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .contact-sub { font-size: 1rem; color: rgba(254,252,248,0.7); margin-bottom: 3rem; position: relative; }
+
+  .contact-link {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1.2rem 3rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .contact-link:hover { background: var(--paper); color: var(--ink); }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .contact-info-item { text-align: center; }
+  .contact-info-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(254,252,248,0.5); margin-bottom: 0.4rem; font-weight: 600; }
+  .contact-info-value { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--paper); font-weight: 700; }
+  .footer-copy { font-size: 0.75rem; color: var(--gray); }
+
+  /* ANIMATIONS */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 2rem 4rem; }
+    .about { grid-template-columns: 1fr; padding: 5rem 2rem; }
+    .about-left { border-right: none; padding-right: 0; padding-bottom: 3rem; border-bottom: 1px solid var(--accent); }
+    .about-right { padding-left: 0; padding-top: 3rem; }
+    .portfolio { padding: 5rem 2rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-item:nth-child(1), .portfolio-item:nth-child(4) { grid-column: 1; }
+    .experience { padding: 5rem 2rem; }
+    .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact { padding: 5rem 2rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">S. Senghor</a>
+  <ul class="nav-links">
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#work">Travaux</a></li>
+    <li><a href="#experience">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+  </div>
+  <div class="hero-label">Graphiste & Créateur visuel</div>
+  <div class="hero-content">
+    <div class="hero-tag">Portfolio 2026</div>
+    <h1 class="hero-title">Design<br><em>Africain</em><br>Moderne</h1>
+    <p class="hero-sub">Stagiaire graphiste passionné par la culture africaine, la typographie et la communication visuelle. Basé à Dakar.</p>
+    <a href="#work" class="hero-cta">
+      Voir mes travaux
+      <span class="hero-cta-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Identité Visuelle <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Réseaux Sociaux <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Couvertures de Livres <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Affiches & Flyers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Typographie <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Édition & Print <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Identité Visuelle <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Réseaux Sociaux <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Couvertures de Livres <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Affiches & Flyers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Typographie <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Édition & Print <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-left reveal">
+    <div class="section-eyebrow">À propos</div>
+    <h2 class="about-title">Créativité & Culture Africaine</h2>
+    <p class="about-text">Je suis Serge Senghor, étudiant en Génie Logiciel à l'ESP de Dakar, avec une forte passion pour le design graphique et la communication visuelle. Ma sensibilité culturelle africaine — nourrie par mes centres d'intérêt pour le manga, l'animé et les arts — inspire profondément mon travail créatif.</p>
+    <p class="about-text">Je maîtrise les outils Figma, Canva et Photoshop, et j'ai eu l'occasion de concevoir des interfaces, des supports de communication et des visuels dans le cadre de mes stages et formations. Je suis convaincu que le design peut être un vecteur puissant de promotion de la littérature et de la culture africaine.</p>
+  </div>
+  <div class="about-right reveal">
+    <div class="section-eyebrow">Compétences</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon"><span class="material-icons">palette</span></div>
+        <div class="skill-name">Design Graphique</div>
+        <div class="skill-tools">Figma · Canva · Photoshop · Composition visuelle</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><span class="material-icons">menu_book</span></div>
+        <div class="skill-name">Édition & Print</div>
+        <div class="skill-tools">Couvertures · Affiches · Flyers · Maquettes</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><span class="material-icons">phone_iphone</span></div>
+        <div class="skill-name">Réseaux Sociaux</div>
+        <div class="skill-tools">Visuels Instagram · Bannières · Stories</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><span class="material-icons">computer</span></div>
+        <div class="skill-name">Web & UI/UX</div>
+        <div class="skill-tools">React · HTML/CSS · Prototypage Figma</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="work">
+  <div class="portfolio-header reveal">
+    <h2 class="portfolio-title">Mes<br><em>Travaux</em></h2>
+    <p class="portfolio-subtitle">Une sélection de créations graphiques illustrant mon approche visuelle et ma sensibilité culturelle.</p>
+  </div>
+
+  <div class="portfolio-grid">
+    <!-- Item 1: App mobile basket -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c1" width="800" height="420"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">UI/UX · App Mobile</div>
+        <div class="portfolio-name">HoopDakar — App de suivi Basketball</div>
+      </div>
+    </div>
+
+    <!-- Item 2: Affiche gaming -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c2" width="400" height="420"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Print · Affiche Gaming</div>
+        <div class="portfolio-name">Tournament Night — Affiche Perso</div>
+      </div>
+    </div>
+
+    <!-- Item 3: Logo karaté -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c3" width="400" height="500"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Logo · Identité</div>
+        <div class="portfolio-name">Dakar Bushi — Logo Club Karaté</div>
+      </div>
+    </div>
+
+    <!-- Item 4: UI App manga -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c4" width="800" height="500"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">UI/UX · Web App</div>
+        <div class="portfolio-name">OtakuList — Interface Manga Tracker</div>
+      </div>
+    </div>
+
+    <!-- Item 5: Visuel culture africaine -->
+    <div class="portfolio-item reveal">
+      <canvas class="portfolio-canvas" id="c5" width="400" height="500"></canvas>
+      <div class="portfolio-overlay">
+        <div class="portfolio-category">Illustration · Affiche</div>
+        <div class="portfolio-name">Afrique Créative — Poster Personnel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="section-eyebrow reveal">Parcours</div>
+  <div class="exp-grid">
+    <div class="exp-timeline reveal">
+      <div class="exp-item" onclick="showExp(0)">
+        <div class="exp-date">Août – Sept. 2024</div>
+        <div class="exp-company">Banque de l'Habitat du Sénégal</div>
+        <div class="exp-role">Stagiaire Développeur & UI Designer</div>
+      </div>
+      <div class="exp-item" onclick="showExp(1)">
+        <div class="exp-date">Mai – Juil. 2024</div>
+        <div class="exp-company">ESP-DGI Centre de Ressources</div>
+        <div class="exp-role">Stagiaire Data Engineering</div>
+      </div>
+      <div class="exp-item" onclick="showExp(2)">
+        <div class="exp-date">Mai – Sept. 2023</div>
+        <div class="exp-company">Laboratoire LITA</div>
+        <div class="exp-role">Stagiaire Développeur</div>
+      </div>
+    </div>
+
+    <div class="exp-detail reveal" id="expDetail">
+      <h3 class="exp-big-title">Banque de l'Habitat du Sénégal</h3>
+      <p class="exp-desc">Conception d'interfaces utilisateurs fonctionnelles et esthétiques pour une application interne C# (.NET). Travail sur l'expérience visuelle et la cohérence graphique des écrans, incluant maquettes UI/UX et documentation technique illustrée.</p>
+      <div class="exp-tags">
+        <span class="exp-tag">Figma</span>
+        <span class="exp-tag">UI Design</span>
+        <span class="exp-tag">C# .NET</span>
+        <span class="exp-tag">Documentation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="contact-title">Travaillons<br>Ensemble</h2>
+  <p class="contact-sub">Disponible pour un stage dès maintenant. Basé à Dakar.</p>
+  <a href="mailto:sergesenghor@esp.sn" class="contact-link">Me contacter</a>
+  <div class="contact-info">
+    <div class="contact-info-item">
+      <div class="contact-info-label"><span class="material-icons" style="font-size:16px;color:rgba(254,252,248,0.5)">email</span> Email</div>
+      <div class="contact-info-value">sergesenghor@esp.sn</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label"><span class="material-icons" style="font-size:16px;color:rgba(254,252,248,0.5)">phone</span> Téléphone</div>
+      <div class="contact-info-value">+221 777 897 742</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label"><span class="material-icons" style="font-size:16px;color:rgba(254,252,248,0.5)">location_on</span> Localisation</div>
+      <div class="contact-info-value">Dakar, Sénégal</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Serge Senghor</div>
+  <div class="footer-copy">© 2026 — Portfolio Graphiste</div>
+</footer>
+
+<script>
+// ======= CANVAS DRAWINGS — PROJETS PERSO =======
+
+function drawCanvas1() {
+  // HoopDakar — UI App Basketball
+  const c = document.getElementById('c1');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  ctx.fillStyle = '#0f0f14';
+  ctx.fillRect(0,0,w,h);
+
+  // Grid background
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  for(let x=0;x<w;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+
+  // Phone mockup left
+  const px=120, py=30, pw=160, ph=h-60, pr=18;
+  ctx.fillStyle = '#1a1a24';
+  ctx.strokeStyle = '#ff6b2b';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.roundRect(px,py,pw,ph,pr);
+  ctx.fill(); ctx.stroke();
+
+  // Screen area
+  ctx.fillStyle = '#0f0f14';
+  ctx.beginPath(); ctx.roundRect(px+8,py+20,pw-16,ph-40,10); ctx.fill();
+
+  // Stats on screen
+  ctx.fillStyle = '#ff6b2b';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('28', px+pw/2, py+70);
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.font = '9px sans-serif';
+  ctx.fillText('PTS / MATCH', px+pw/2, py+85);
+
+  // Mini bars
+  [[0.6,'#ff6b2b'],[0.8,'#ff6b2b'],[0.45,'rgba(255,107,43,0.4)'],[0.9,'#ff6b2b'],[0.7,'rgba(255,107,43,0.4)']].forEach(([v,col],i)=>{
+    ctx.fillStyle = 'rgba(255,255,255,0.05)';
+    ctx.fillRect(px+18+i*24, py+100, 16, 60);
+    ctx.fillStyle = col;
+    ctx.fillRect(px+18+i*24, py+100+60*(1-v), 16, 60*v);
+  });
+
+  // Right panel - app cards
+  const cards = [
+    {label:'Points', val:'28.4', col:'#ff6b2b'},
+    {label:'Rebonds', val:'7.2', col:'#00d4aa'},
+    {label:'Passes', val:'5.8', col:'#7c6fff'},
+    {label:'Matchs', val:'24', col:'#ffd166'},
+  ];
+  cards.forEach((card,i)=>{
+    const cx = 360 + (i%2)*200, cy = 60 + Math.floor(i/2)*160;
+    ctx.fillStyle = '#1a1a24';
+    ctx.strokeStyle = card.col+'44';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.roundRect(cx,cy,170,130,10); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = card.col;
+    ctx.font = 'bold 36px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(card.val, cx+16, cy+65);
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    ctx.font = '11px sans-serif';
+    ctx.fillText(card.label.toUpperCase(), cx+16, cy+90);
+    // Mini spark line
+    ctx.strokeStyle = card.col+'88';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    [0,0.3,0.15,0.7,0.5,0.9,0.6,1].forEach((v,j)=>{
+      const sx=cx+16+j*18, sy=cy+118-v*20;
+      j===0?ctx.moveTo(sx,sy):ctx.lineTo(sx,sy);
+    });
+    ctx.stroke();
+  });
+
+  // App name top right
+  ctx.fillStyle = '#ff6b2b';
+  ctx.font = 'bold 20px sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('HoopDakar', w-30, 35);
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '10px sans-serif';
+  ctx.fillText('Basketball Tracker · UI Design Perso', w-30, 52);
+}
+
+function drawCanvas2() {
+  // Tournament Night — Gaming Poster
+  const c = document.getElementById('c2');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  const bg = ctx.createLinearGradient(0,0,0,h);
+  bg.addColorStop(0,'#0a0010');
+  bg.addColorStop(0.5,'#1a0030');
+  bg.addColorStop(1,'#000a20');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,w,h);
+
+  // Scanlines
+  ctx.fillStyle = 'rgba(255,255,255,0.015)';
+  for(let y=0;y<h;y+=4){ctx.fillRect(0,y,w,2);}
+
+  // Glow circles
+  const grd = ctx.createRadialGradient(w/2,h*0.4,0,w/2,h*0.4,180);
+  grd.addColorStop(0,'rgba(120,0,255,0.3)');
+  grd.addColorStop(1,'transparent');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0,0,w,h);
+
+  const grd2 = ctx.createRadialGradient(w/2,h*0.4,0,w/2,h*0.4,80);
+  grd2.addColorStop(0,'rgba(0,200,255,0.15)');
+  grd2.addColorStop(1,'transparent');
+  ctx.fillStyle = grd2;
+  ctx.fillRect(0,0,w,h);
+
+  // Hexagon pattern
+  ctx.strokeStyle = 'rgba(120,0,255,0.12)';
+  ctx.lineWidth = 1;
+  const hex = (x,y,r)=>{
+    ctx.beginPath();
+    for(let i=0;i<6;i++){
+      const a=i*Math.PI/3-Math.PI/6;
+      i===0?ctx.moveTo(x+r*Math.cos(a),y+r*Math.sin(a)):ctx.lineTo(x+r*Math.cos(a),y+r*Math.sin(a));
+    }
+    ctx.closePath(); ctx.stroke();
+  };
+  for(let hx=0;hx<w+60;hx+=52){
+    for(let hy=0;hy<h+60;hy+=45){
+      hex(hx+(hy/45%2)*26, hy, 28);
+    }
+  }
+
+  // Controller silhouette (geometric)
+  ctx.strokeStyle = 'rgba(0,200,255,0.5)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(w/2,h*0.38,55,0,Math.PI*2);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(120,0,255,0.7)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(w/2,h*0.38,70,0,Math.PI*2);
+  ctx.stroke();
+
+  // Cross / joystick shapes
+  [[w/2-30,h*0.38],[w/2,h*0.38-30],[w/2+30,h*0.38],[w/2,h*0.38+30]].forEach(([bx,by])=>{
+    ctx.fillStyle = 'rgba(0,200,255,0.6)';
+    ctx.beginPath(); ctx.arc(bx,by,5,0,Math.PI*2); ctx.fill();
+  });
+  ctx.fillStyle = 'rgba(120,0,255,0.8)';
+  ctx.beginPath(); ctx.arc(w/2+28,h*0.32,4,0,Math.PI*2); ctx.fill();
+
+  // Text
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(0,200,255,0.8)';
+  ctx.font='bold 11px sans-serif';
+  ctx.letterSpacing='0.3em';
+  ctx.fillText('DAKAR GAMING CREW', w/2, h*0.62);
+
+  ctx.font='bold italic 44px Georgia,serif';
+  const grad3=ctx.createLinearGradient(0,h*0.65,0,h*0.82);
+  grad3.addColorStop(0,'#fff');
+  grad3.addColorStop(1,'#7c00ff');
+  ctx.fillStyle=grad3;
+  ctx.fillText('TOURNAMENT', w/2, h*0.72);
+  ctx.fillText('NIGHT', w/2, h*0.82);
+
+  ctx.fillStyle='rgba(255,255,255,0.3)';
+  ctx.font='10px sans-serif';
+  ctx.fillText('DESIGN PERSONNEL · 2025', w/2, h*0.91);
+}
+
+function drawCanvas3() {
+  // Dakar Bushi — Logo Karaté
+  const c = document.getElementById('c3');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  ctx.fillStyle = '#f7f3ee';
+  ctx.fillRect(0,0,w,h);
+
+  // Background texture lines
+  ctx.strokeStyle='rgba(0,0,0,0.04)';
+  ctx.lineWidth=1;
+  for(let i=0;i<w+h;i+=18){
+    ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(0,i);ctx.stroke();
+  }
+
+  const cx=w/2, cy=h*0.42;
+
+  // Outer octagon (karaté ring)
+  ctx.strokeStyle='#1a1410';
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  for(let i=0;i<8;i++){
+    const a=i*Math.PI/4-Math.PI/8;
+    const r=105;
+    i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+  }
+  ctx.closePath(); ctx.stroke();
+
+  // Inner circle fill
+  ctx.fillStyle='#1a1410';
+  ctx.beginPath(); ctx.arc(cx,cy,70,0,Math.PI*2); ctx.fill();
+
+  // Fist / impact shape (abstrait)
+  ctx.fillStyle='#c8873a';
+  // Simple bold K shape
+  ctx.font='bold 52px Georgia,serif';
+  ctx.textAlign='center';
+  ctx.fillText('道', cx, cy+18);
+
+  // Red accent band
+  ctx.fillStyle='#c0392b';
+  ctx.fillRect(cx-105, cy+88, 210, 6);
+
+  // Club name
+  ctx.fillStyle='#1a1410';
+  ctx.font='bold 22px sans-serif';
+  ctx.textAlign='center';
+  ctx.fillText('DAKAR BUSHI', cx, cy+130);
+
+  ctx.fillStyle='#c8873a';
+  ctx.font='bold 11px sans-serif';
+  ctx.fillText('KARATÉ · EST. 2023', cx, cy+150);
+
+  // Belt colors at bottom
+  ['#1a1410','#c8873a','#c0392b','#2a7a7a'].forEach((col,i)=>{
+    ctx.fillStyle=col;
+    ctx.fillRect(cx-60+i*32, cy+170, 24, 8);
+  });
+
+  ctx.fillStyle='rgba(0,0,0,0.2)';
+  ctx.font='9px sans-serif';
+  ctx.fillText('LOGO PERSONNEL · FIGMA + CANVA', cx, h-20);
+}
+
+function drawCanvas4() {
+  // OtakuList — UI Manga Tracker
+  const c = document.getElementById('c4');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  ctx.fillStyle = '#12101a';
+  ctx.fillRect(0,0,w,h);
+
+  // Sidebar
+  ctx.fillStyle='#1c1928';
+  ctx.fillRect(0,0,200,h);
+
+  // Sidebar nav items
+  const navItems=['Accueil','Ma Liste','En Cours','Terminés','Favoris'];
+  navItems.forEach((item,i)=>{
+    if(i===1){
+      ctx.fillStyle='rgba(155,89,255,0.2)';
+      ctx.fillRect(0,70+i*52,200,44);
+      ctx.fillStyle='#9b59ff';
+    } else {
+      ctx.fillStyle='rgba(255,255,255,0.3)';
+    }
+    ctx.font=`${i===1?'bold ':''} 13px sans-serif`;
+    ctx.textAlign='left';
+    ctx.fillText(item, 32, 98+i*52);
+  });
+
+  // Logo sidebar
+  ctx.fillStyle='#9b59ff';
+  ctx.font='bold 18px Georgia,serif';
+  ctx.textAlign='left';
+  ctx.fillText('オタク', 24, 44);
+  ctx.fillStyle='rgba(255,255,255,0.5)';
+  ctx.font='9px sans-serif';
+  ctx.fillText('OtakuList', 24, 58);
+
+  // Main content
+  ctx.fillStyle='rgba(255,255,255,0.7)';
+  ctx.font='bold 14px sans-serif';
+  ctx.textAlign='left';
+  ctx.fillText('MA LISTE', 230, 40);
+
+  // Manga cards
+  const mangas=[
+    {title:'One Piece',ep:'1104',col:'#f39c12'},
+    {title:'Jujutsu Kaisen',ep:'265',col:'#9b59ff'},
+    {title:'Vinland Saga',ep:'200',col:'#2ecc71'},
+    {title:'Berserk',ep:'374',col:'#e74c3c'},
+    {title:'Chainsaw Man',ep:'168',col:'#e67e22'},
+    {title:'Solo Leveling',ep:'201',col:'#3498db'},
+  ];
+  mangas.forEach((m,i)=>{
+    const mx=230+(i%3)*175, my=60+Math.floor(i/3)*195;
+    ctx.fillStyle='#1c1928';
+    ctx.strokeStyle=m.col+'44';
+    ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.roundRect(mx,my,155,175,8); ctx.fill(); ctx.stroke();
+
+    // Color band top
+    ctx.fillStyle=m.col;
+    ctx.beginPath(); ctx.roundRect(mx,my,155,5,[8,8,0,0]); ctx.fill();
+
+    // Cover placeholder (gradient)
+    const cg=ctx.createLinearGradient(mx,my+5,mx,my+110);
+    cg.addColorStop(0,m.col+'33');
+    cg.addColorStop(1,'transparent');
+    ctx.fillStyle=cg;
+    ctx.fillRect(mx,my+5,155,110);
+
+    // Kanji / initial
+    ctx.fillStyle=m.col+'88';
+    ctx.font='bold 44px Georgia,serif';
+    ctx.textAlign='center';
+    ctx.fillText(m.title[0],mx+77,my+75);
+
+    // Info
+    ctx.fillStyle='rgba(255,255,255,0.85)';
+    ctx.font='bold 11px sans-serif';
+    ctx.fillText(m.title,mx+77,my+128);
+    ctx.fillStyle=m.col;
+    ctx.font='10px sans-serif';
+    ctx.fillText(`Ch. ${m.ep}`,mx+77,my+145);
+
+    // Progress bar
+    const prog=0.4+Math.random()*0.5;
+    ctx.fillStyle='rgba(255,255,255,0.08)';
+    ctx.fillRect(mx+12,my+155,131,4);
+    ctx.fillStyle=m.col;
+    ctx.fillRect(mx+12,my+155,131*prog,4);
+  });
+
+  // Top right tag
+  ctx.fillStyle='rgba(155,89,255,0.15)';
+  ctx.beginPath(); ctx.roundRect(w-160,10,140,30,6); ctx.fill();
+  ctx.fillStyle='#9b59ff';
+  ctx.font='bold 11px sans-serif';
+  ctx.textAlign='right';
+  ctx.fillText('UI DESIGN PERSO', w-20, 30);
+}
+
+function drawCanvas5() {
+  // Afrique Créative — Poster Personnel
+  const c = document.getElementById('c5');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+
+  const bg = ctx.createLinearGradient(0,0,w,h);
+  bg.addColorStop(0,'#1a0a00');
+  bg.addColorStop(0.5,'#2d1a00');
+  bg.addColorStop(1,'#001a10');
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,w,h);
+
+  // Kente-inspired horizontal stripes
+  const stripes=['#c8873a','#2a7a7a','#c0392b','#f39c12','#1a5276'];
+  stripes.forEach((col,i)=>{
+    ctx.fillStyle=col+'22';
+    ctx.fillRect(0,i*(h/5),w,h/5);
+  });
+
+  // Adinkra-inspired pattern (spiral / sankofa)
+  const drawSpiral=(x,y,r,col)=>{
+    ctx.strokeStyle=col;
+    ctx.lineWidth=1.5;
+    for(let t=0;t<Math.PI*4;t+=0.1){
+      const sr=r*(t/(Math.PI*4));
+      const sx=x+sr*Math.cos(t), sy=y+sr*Math.sin(t);
+      t<0.1?ctx.beginPath():null;
+      t<0.1?ctx.moveTo(sx,sy):ctx.lineTo(sx,sy);
+    }
+    ctx.stroke();
+  };
+  drawSpiral(w*0.2,h*0.3,50,'rgba(200,135,58,0.4)');
+  drawSpiral(w*0.8,h*0.3,40,'rgba(42,122,122,0.4)');
+  drawSpiral(w*0.5,h*0.7,35,'rgba(192,57,43,0.3)');
+
+  // Central diamond
+  ctx.save();
+  ctx.translate(w/2, h*0.42);
+  ctx.rotate(Math.PI/4);
+  ctx.strokeStyle='#c8873a';
+  ctx.lineWidth=2;
+  ctx.strokeRect(-55,-55,110,110);
+  ctx.strokeStyle='rgba(200,135,58,0.3)';
+  ctx.lineWidth=1;
+  ctx.strokeRect(-70,-70,140,140);
+  ctx.restore();
+
+  // Map of Africa silhouette (very simplified geometric)
+  ctx.fillStyle='rgba(200,135,58,0.12)';
+  ctx.beginPath();
+  ctx.moveTo(w/2,h*0.15);
+  ctx.bezierCurveTo(w*0.75,h*0.18,w*0.8,h*0.5,w*0.65,h*0.72);
+  ctx.bezierCurveTo(w*0.55,h*0.85,w*0.45,h*0.85,w*0.35,h*0.72);
+  ctx.bezierCurveTo(w*0.2,h*0.5,w*0.25,h*0.18,w/2,h*0.15);
+  ctx.fill();
+
+  // Text
+  ctx.textAlign='center';
+  ctx.fillStyle='#c8873a';
+  ctx.font='bold 11px sans-serif';
+  ctx.fillText('PROJET PERSONNEL · ILLUSTRATION', w/2, h*0.08);
+
+  ctx.fillStyle='#fefcf8';
+  ctx.font='bold italic 40px Georgia,serif';
+  ctx.fillText('Afrique', w/2, h*0.48);
+  ctx.fillStyle='#c8873a';
+  ctx.font='bold 32px Georgia,serif';
+  ctx.fillText('CRÉATIVE', w/2, h*0.58);
+
+  ctx.fillStyle='rgba(254,252,248,0.4)';
+  ctx.font='10px sans-serif';
+  ctx.fillText('Art · Culture · Design · Dakar 2025', w/2, h*0.68);
+}
+
+// Experience switcher
+const expData = [
+  {
+    title: 'Banque de l\'Habitat du Sénégal',
+    desc: 'Conception d\'interfaces utilisateurs fonctionnelles et esthétiques pour une application interne. Réalisation de maquettes UI/UX, cohérence graphique des écrans et documentation technique illustrée.',
+    tags: ['Figma', 'UI Design', 'C# .NET', 'Documentation']
+  },
+  {
+    title: 'ESP-DGI Centre de Ressources',
+    desc: 'Production de rapports d\'évaluation technique avec mise en page soignée. Création de supports de présentation clairs et visuellement attractifs pour une communication efficace des résultats.',
+    tags: ['Data Viz', 'Python', 'Présentation', 'Rapport Technique']
+  },
+  {
+    title: 'Laboratoire LITA',
+    desc: 'Participation à la conception technique et visuelle d\'applications internes. Réalisation de supports de documentation graphique et contribution à l\'ergonomie des interfaces développées.',
+    tags: ['UI', 'Documentation', 'Conception', 'Tests']
+  }
+];
+
+function showExp(i) {
+  const d = expData[i];
+  const el = document.getElementById('expDetail');
+  el.innerHTML = `
+    <h3 class="exp-big-title">${d.title}</h3>
+    <p class="exp-desc">${d.desc}</p>
+    <div class="exp-tags">${d.tags.map(t => `<span class="exp-tag">${t}</span>`).join('')}</div>
+  `;
+}
+
+// Intersection Observer for reveals
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 100);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => obs.observe(el));
+
+// Draw canvases on load
+window.addEventListener('load', () => {
+  drawCanvas1(); drawCanvas2(); drawCanvas3(); drawCanvas4(); drawCanvas5();
+});
+</script>
+</body>
+</html>
